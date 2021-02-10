@@ -80,11 +80,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `phoneNumber`, `pin`, `balance`, `picture`, `role`, `status`, `createdAt`, `updatedAt`) VALUES
-<<<<<<< HEAD
 (16, 'Abbi', 'Satria', 'abbisatria98@gmail.com', '$2b$10$Yb7jS27IQfTi5ZOj0WzQLesGn6bciMFgRPhijWu7M/Yhqf99Ggmya', NULL, NULL, 120000, NULL, 2, 'active', '2021-02-10 06:21:41', '2021-02-10 06:46:21');
-=======
-(16, 'Abbi', NULL, 'abbisatria98@gmail.com', '$2b$10$O8tv6LB/3dW6L7OYPmCpZOfYL9g/gQWfH4RKoaOJeVWBbVIfg2npK', NULL, NULL, 120000, NULL, 2, 'pending', '2021-02-10 06:21:41', '0000-00-00 00:00:00');
->>>>>>> f195cb2ecb2d019c474dc135ded17675e7d93c52
 
 --
 -- Indexes for dumped tables
