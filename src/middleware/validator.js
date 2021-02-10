@@ -22,7 +22,7 @@ exports.updateUser = checkSchema({
     optional: { options: { nullable: true } },
     isLength: {
       options: { min: 2, max: 50 },
-      errorMessage: 'Frist name should be at least min 2 & max 50 character'
+      errorMessage: 'First name should be at least min 2 & max 50 character'
     }
   },
   lastname: {
