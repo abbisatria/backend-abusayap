@@ -73,7 +73,7 @@ exports.verificationEmail = async (req, res) => {
     const { id } = req.params
     if (id) {
       await userModel.updateUser(id, { status: 'active' })
-      return res.redirect('http://localhost:3000/sign-in')
+      return res.redirect(`http://localhost:3000/create-pin/${id}`)
     }
     return response(res, 400, false, 'Failed email verification')
   } catch (error) {
