@@ -96,3 +96,16 @@ exports.detailTransaction = async (req, res) => {
     return response(res, 400, false, 'Bad Request')
   }
 }
+
+exports.amountTransactionByUser = async (req, res) => {
+  try {
+    const { id } = req.params
+    const results = await transactionModel.getAmountTransactionByIdUser(id)
+    if (results.length === 1) {
+      return response(res, 200, true, 'Amount Transaction User', results)
+    }
+    return response(res, 404, false, 'Cant Found Detail Transaction')
+  } catch (error) {
+    return response(res, 400, false, 'Bad Request')
+  }
+}

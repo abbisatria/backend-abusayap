@@ -69,3 +69,14 @@ exports.getUserTransactionById = (id) => {
     console.log(query.sql)
   })
 }
+
+exports.getAmountTransactionByIdUser = (id) => {
+  return new Promise((resolve, reject) => {
+    const query = db.query(`SELECT * FROM amount_transaction
+    WHERE idUser=${id}`, (err, res, field) => {
+      if (err) reject(err)
+      resolve(res)
+    })
+    console.log(query.sql)
+  })
+}
