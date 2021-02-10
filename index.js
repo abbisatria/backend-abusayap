@@ -16,6 +16,7 @@ app.use(cors('*'))
 app.use('/uploads', express.static('uploads'))
 
 // Put Routes in here
+app.use('/auth', require('./src/routes/auth'))
 
 // Test App
 app.get('/', (req, res) => {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Feb 2021 pada 06.17
+-- Waktu pembuatan: 10 Feb 2021 pada 08.05
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.4
 
@@ -62,11 +62,11 @@ CREATE TABLE `transactions` (
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `firstname` varchar(50) NOT NULL,
-  `lastname` varchar(50) NOT NULL,
+  `lastname` varchar(50) DEFAULT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(60) NOT NULL,
   `phoneNumber` varchar(15) DEFAULT NULL,
-  `pin` varchar(60) NOT NULL,
+  `pin` varchar(60) DEFAULT NULL,
   `balance` int(11) NOT NULL,
   `picture` varchar(100) DEFAULT NULL,
   `role` int(11) NOT NULL,
@@ -74,6 +74,13 @@ CREATE TABLE `users` (
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `users`
+--
+
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `phoneNumber`, `pin`, `balance`, `picture`, `role`, `status`, `createdAt`, `updatedAt`) VALUES
+(16, 'Abbi', 'Satria', 'abbisatria98@gmail.com', '$2b$10$Yb7jS27IQfTi5ZOj0WzQLesGn6bciMFgRPhijWu7M/Yhqf99Ggmya', NULL, NULL, 120000, NULL, 2, 'active', '2021-02-10 06:21:41', '2021-02-10 06:46:21');
 
 --
 -- Indexes for dumped tables
@@ -120,7 +127,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
