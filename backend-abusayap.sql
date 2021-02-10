@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Feb 2021 pada 08.05
+-- Waktu pembuatan: 10 Feb 2021 pada 18.05
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.4
 
@@ -30,11 +30,19 @@ SET time_zone = "+00:00";
 CREATE TABLE `amount_transaction` (
   `id` int(11) NOT NULL,
   `idUser` int(11) NOT NULL,
-  `income` int(11) NOT NULL,
-  `expense` int(11) NOT NULL,
+  `income` int(11) DEFAULT NULL,
+  `expense` int(11) DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `amount_transaction`
+--
+
+INSERT INTO `amount_transaction` (`id`, `idUser`, `income`, `expense`, `createdAt`, `updatedAt`) VALUES
+(3, 16, 80000, 120000, '2021-02-10 15:41:05', '2021-02-10 16:19:08'),
+(4, 17, 120000, 80000, '2021-02-10 15:41:05', '2021-02-10 16:19:08');
 
 -- --------------------------------------------------------
 
@@ -49,9 +57,22 @@ CREATE TABLE `transactions` (
   `amount` int(11) NOT NULL,
   `notes` text NOT NULL,
   `status` varchar(50) NOT NULL,
+  `dateTransaction` datetime NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updatedAt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `idSender`, `idReceiver`, `amount`, `notes`, `status`, `dateTransaction`, `createdAt`, `updatedAt`) VALUES
+(2, 16, 17, 100000, 'transfer cuy', 'transfer', '2021-02-10 22:12:15', '2021-02-10 15:41:05', '0000-00-00 00:00:00'),
+(4, 16, 17, 20000, 'transfer cuy', 'transfer', '2021-02-10 22:12:15', '2021-02-10 15:49:56', '0000-00-00 00:00:00'),
+(5, 17, 16, 20000, 'transfer aja', 'transfer', '2021-02-10 22:12:15', '2021-02-10 15:52:25', '0000-00-00 00:00:00'),
+(6, 17, 16, 20000, 'transfer aja', 'transfer', '2021-02-10 22:12:15', '2021-02-10 16:13:58', '0000-00-00 00:00:00'),
+(7, 17, 16, 20000, 'transfer aja', 'transfer', '2021-02-10 22:12:15', '2021-02-10 16:16:54', '0000-00-00 00:00:00'),
+(8, 17, 16, 20000, 'transfer aja', 'transfer', '2021-02-10 22:12:15', '2021-02-10 16:19:08', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -80,7 +101,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `phoneNumber`, `pin`, `balance`, `picture`, `role`, `status`, `createdAt`, `updatedAt`) VALUES
-(16, 'Abbi', 'Satria', 'abbisatria98@gmail.com', '$2b$10$Yb7jS27IQfTi5ZOj0WzQLesGn6bciMFgRPhijWu7M/Yhqf99Ggmya', NULL, NULL, 120000, NULL, 2, 'active', '2021-02-10 06:21:41', '2021-02-10 06:46:21');
+(16, 'abbi', 'satria', 'abbisatria98@gmail.com', '$2b$10$9UltJvpymNQSlB4sY6p.au77uXBwk8jLTr22StUjtQvIJRhJYCX2O', '085811588248', '$2b$10$zBXudvOEGfmw84NjEw8pMOyKDH4UvdW1shLI8v6wUIDiPS5vNSfNe', 0, 'profile-picture-1612968135647.jpg', 2, 'active', '2021-02-10 06:21:41', '2021-02-10 15:49:56'),
+(17, 'Ridho', NULL, 'ridho@gmail.com', '$2b$10$WJFexHTs/gAVUHlDnNk.FeXiSiBkkwLn9TZQkILnzO.kcQNFIWHe2', NULL, '$2b$10$Ps8HTjtVCy5oZyUVivu0OuGi979PZWe80G6uC32OIQ5EIWCASmxj2', 40000, NULL, 2, 'active', '2021-02-10 15:10:36', '2021-02-10 16:19:08');
 
 --
 -- Indexes for dumped tables
@@ -115,19 +137,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `amount_transaction`
 --
 ALTER TABLE `amount_transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
