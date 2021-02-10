@@ -17,6 +17,7 @@ app.use('/uploads', express.static('uploads'))
 
 // Put Routes in here
 app.use('/auth', require('./src/routes/auth'))
+app.use('/user', require('./src/routes/user'))
 
 // Test App
 app.get('/', (req, res) => {

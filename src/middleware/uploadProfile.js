@@ -3,7 +3,7 @@ const path = require('path')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/profile')
+    cb(null, 'upload/profile')
   },
   filename: (req, file, cb) => {
     cb(null, `profile-${file.fieldname}-${new Date().getTime()}.${file.originalname.split('.')[file.originalname.split('.').length - 1]}`)
@@ -27,7 +27,7 @@ const uploadMovies = multer({
   storage: storage,
   fileFilter: fileFilter,
   limits: limits
-}).single('image')
+}).single('picture')
 
 const upload = (req, res, next) => {
   uploadMovies(req, res, (err) => {
@@ -38,9 +38,10 @@ const upload = (req, res, next) => {
         message: err.message
       })
     } else if (err) {
+      console.log(err)
       return res.json({
         success: false,
-        message: 'Failed to upload image!'
+        message: 'Failed to upload picture!'
       })
     }
     next()
