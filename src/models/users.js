@@ -42,3 +42,47 @@ exports.updateUser = (id, data) => {
     console.log(query.sql)
   })
 }
+
+exports.getAllContactByCondition = (id, cond) => {
+  return new Promise((resolve, reject) => {
+    const query = db.query(`
+    SELECT id, CONCAT(firstname, ' ', lastname) AS name, email, phoneNumber, picture 
+    FROM users
+    WHERE CONCAT(firstname, ' ', lastname) LIKE "%${cond.search}%" AND id NOT IN (${id})
+    ORDER BY ${cond.sort} ${cond.order}
+    LIMIT ${cond.limit} OFFSET ${cond.offset}
+    `, (err, res, field) => {
+      if (err) reject(err)
+      resolve(res)
+    })
+    console.log(query.sql)
+  })
+}
+
+exports.getCountContactByCondition = (id, cond) => {
+  return new Promise((resolve, reject) => {
+    const query = db.query(`
+    SELECT COUNT(id) as totalData 
+    FROM users 
+    WHERE CONCAT(firstname, ' ', lastname) LIKE "%${cond.search}%"  AND id NOT IN (${id})
+    `, (err, res, field) => {
+      if (err) reject(err)
+      resolve(res)
+    })
+    console.log(query.sql)
+  })
+}
+
+exports.getCountContact = (id, cond) => {
+  return new Promise((resolve, reject) => {
+    const query = db.query(`
+    SELECT COUNT(id) as totalData 
+    FROM users 
+    WHERE id NOT IN (${id})
+    `, (err, res, field) => {
+      if (err) reject(err)
+      resolve(res)
+    })
+    console.log(query.sql)
+  })
+}
