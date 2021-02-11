@@ -1,7 +1,9 @@
+const { APP_URL } = process.env
 const transactionModel = require('../models/transaction')
 const userModel = require('../models/users')
 const response = require('../helpers/response')
 const bcrypt = require('bcrypt')
+const qs = require('querystring')
 
 exports.createTransaction = async (req, res) => {
   try {
@@ -106,6 +108,59 @@ exports.amountTransactionByUser = async (req, res) => {
     }
     return response(res, 404, false, 'Cant Found Detail Transaction')
   } catch (error) {
+    return response(res, 400, false, 'Bad Request')
+  }
+}
+
+exports.trasactionHistory = async (req, res) => {
+  try {
+    const { id } = req.userData
+    const cond = req.query
+    cond.search = cond.search || ''
+    cond.page = Number(cond.page) || 1
+    cond.limit = Number(cond.limit) || 4
+    cond.offset = (cond.page - 1) * cond.limit
+    cond.sort = cond.sort || 'id'
+    cond.order = cond.order || 'ASC'
+
+    const totalData = await transactionModel.getCountTransactionHistory(id, cond)
+    const totalPage = Math.ceil(Number(totalData[0].totalData) / cond.limit)
+
+    const results = await transactionModel.getTransactionHistory(id, cond)
+    if (results.length > 0) {
+      return response(
+        res,
+        200,
+        true,
+        'List of all Contact',
+        results.reduce((value, item) => {
+          if (item.idSender === id) {
+            value.push({
+              userAs: 'sender',
+              ...item
+            })
+          } else {
+            value.push({
+              userAs: 'receiver',
+              ...item
+            })
+          }
+          return value
+        }, []),
+        {
+          totalData: totalData[0].totalData,
+          currentPage: cond.page,
+          totalPage,
+          nextLink: cond.page < totalPage ? `${APP_URL}transaction/history?${qs.stringify({ ...req.query, ...{ page: cond.page + 1 } })}` : null,
+          prevLink: cond.page > 1 ? `${APP_URL}transaction/history?${qs.stringify({ ...req.query, ...{ page: cond.page - 1 } })}` : null
+        }
+      )
+    }
+
+    console.log(totalData)
+    return response(res, 200, true, 'No transactions')
+  } catch (err) {
+    console.log(err)
     return response(res, 400, false, 'Bad Request')
   }
 }

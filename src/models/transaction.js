@@ -80,3 +80,39 @@ exports.getAmountTransactionByIdUser = (id) => {
     console.log(query.sql)
   })
 }
+
+exports.getTransactionHistory = (id, cond) => {
+  return new Promise((resolve, reject) => {
+    const query = db.query(`
+    SELECT t.*, u.id as idUser, picture, CONCAT(u.firstname, ' ', u.lastname) as name, email, phoneNumber
+    FROM transactions t
+    INNER JOIN users u ON u.id=idSender OR u.id = idReceiver
+    WHERE (idSender=${id} OR idReceiver=${id})
+    AND CONCAT(u.firstname, ' ', u.lastname) LIKE "%${cond.search}%"
+    AND u.id NOT IN (${id})
+    ORDER BY ${cond.sort} ${cond.order}
+    LIMIT ${cond.limit} OFFSET ${cond.offset}
+    `, (err, res, field) => {
+      if (err) reject(err)
+      resolve(res)
+    })
+    console.log(query.sql)
+  })
+}
+
+exports.getCountTransactionHistory = (id, cond) => {
+  return new Promise((resolve, reject) => {
+    const query = db.query(`
+    SELECT COUNT(t.id) as totalData 
+    FROM transactions t
+    INNER JOIN users u ON u.id=idSender OR u.id = idReceiver
+    WHERE (idSender=${id} OR idReceiver=${id})
+    AND CONCAT(u.firstname, ' ', u.lastname) LIKE "%${cond.search}%"
+    AND u.id NOT IN (${id})
+    `, (err, res, field) => {
+      if (err) reject(err)
+      resolve(res)
+    })
+    console.log(query.sql)
+  })
+}
