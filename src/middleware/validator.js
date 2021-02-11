@@ -47,3 +47,58 @@ exports.updateUser = checkSchema({
     }
   }
 })
+
+exports.transaction = checkSchema({
+  pin: {
+    notEmpty: {
+      errorMessage: 'PIN is required.'
+    },
+    isNumeric: {
+      errorMessage: 'PIN must to number character'
+    },
+    isLength: {
+      options: { min: 6, max: 6 },
+      errorMessage: 'PIN should be at least min 6 & max 6 character'
+    }
+  },
+  amount: {
+    notEmpty: {
+      errorMessage: 'The amount to transfer is required.'
+    },
+    isNumeric: {
+      errorMessage: 'The amout to transfer must to number character'
+    },
+    isLength: {
+      options: { min: 2 },
+      errorMessage: 'The amout should be at least min 2 character'
+    }
+  },
+  dateTransaction: {
+    notEmpty: {
+      errorMessage: 'dateTransaction is required'
+    }
+  },
+  status: {
+    notEmpty: {
+      errorMessage: 'status is required'
+    },
+    isLength: {
+      options: { min: 3 },
+      errorMessage: 'status should be at least min 2 character'
+    }
+  },
+  notes: {
+    notEmpty: {
+      errorMessage: 'notes is required'
+    },
+    isLength: {
+      options: { min: 2 },
+      errorMessage: 'notes should be at least min 2 character'
+    }
+  },
+  idReceiver: {
+    notEmpty: {
+      errorMessage: 'idReceiver is required'
+    }
+  }
+})
