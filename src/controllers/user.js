@@ -77,7 +77,7 @@ exports.UpdateUser = async (req, res) => {
       } else {
         const updatePhoneNumber = await userModel.updateUser(id, { phoneNumber: phoneNumber })
         if (updatePhoneNumber.affectedRows > 0) {
-          return response(res, 200, false, 'Phone number hasbeen updated', { id, phoneNumber })
+          return response(res, 200, true, 'Phone number hasbeen updated', { id, phoneNumber })
         }
         return response(res, 400, false, 'Cant update phone number1')
       }
@@ -100,7 +100,7 @@ exports.UpdateUser = async (req, res) => {
     // info
     const finalResult = await userModel.updateUser(id, data)
     if (finalResult.affectedRows > 0) {
-      return response(res, 200, 'Personal Information has been updated', { ...initialResults[0], ...data })
+      return response(res, 200, true, 'Personal Information has been updated', { ...initialResults[0], ...data })
     }
     return response(res, 400, false, 'Cant Update personal Information')
   } catch (err) {
