@@ -52,8 +52,7 @@ exports.createTransaction = async (req, res) => {
           notes: finalResults[0].notes,
           receiver: [
             {
-              firstname: userReceiver[0].firstname,
-              lastname: userReceiver[0].lastname,
+              name: `${userReceiver[0].firstname} ${userReceiver[0].lastname}`,
               picture: userReceiver[0].picture,
               phoneNumber: userReceiver[0].phoneNumber
             }
