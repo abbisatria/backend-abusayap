@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(morgan('dev'))
 app.use(cors('*'))
 
-app.use('/uploads', express.static('uploads'))
+app.use('/upload', express.static('upload'))
 
 // Put Routes in here
 app.use('/auth', require('./src/routes/auth'))

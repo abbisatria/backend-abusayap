@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Feb 2021 pada 18.05
+-- Waktu pembuatan: 13 Feb 2021 pada 11.00
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.4
 
@@ -41,8 +41,8 @@ CREATE TABLE `amount_transaction` (
 --
 
 INSERT INTO `amount_transaction` (`id`, `idUser`, `income`, `expense`, `createdAt`, `updatedAt`) VALUES
-(3, 16, 80000, 120000, '2021-02-10 15:41:05', '2021-02-10 16:19:08'),
-(4, 17, 120000, 80000, '2021-02-10 15:41:05', '2021-02-10 16:19:08');
+(5, 24, NULL, 20000, '2021-02-13 08:58:48', '0000-00-00 00:00:00'),
+(6, 25, 20000, NULL, '2021-02-13 08:58:48', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -67,12 +67,7 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`id`, `idSender`, `idReceiver`, `amount`, `notes`, `status`, `dateTransaction`, `createdAt`, `updatedAt`) VALUES
-(2, 16, 17, 100000, 'transfer cuy', 'transfer', '2021-02-10 22:12:15', '2021-02-10 15:41:05', '0000-00-00 00:00:00'),
-(4, 16, 17, 20000, 'transfer cuy', 'transfer', '2021-02-10 22:12:15', '2021-02-10 15:49:56', '0000-00-00 00:00:00'),
-(5, 17, 16, 20000, 'transfer aja', 'transfer', '2021-02-10 22:12:15', '2021-02-10 15:52:25', '0000-00-00 00:00:00'),
-(6, 17, 16, 20000, 'transfer aja', 'transfer', '2021-02-10 22:12:15', '2021-02-10 16:13:58', '0000-00-00 00:00:00'),
-(7, 17, 16, 20000, 'transfer aja', 'transfer', '2021-02-10 22:12:15', '2021-02-10 16:16:54', '0000-00-00 00:00:00'),
-(8, 17, 16, 20000, 'transfer aja', 'transfer', '2021-02-10 22:12:15', '2021-02-10 16:19:08', '0000-00-00 00:00:00');
+(9, 24, 25, 20000, 'transfer aja', 'transfer', '2021-02-10 22:12:15', '2021-02-13 08:58:48', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -83,7 +78,7 @@ INSERT INTO `transactions` (`id`, `idSender`, `idReceiver`, `amount`, `notes`, `
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `firstname` varchar(50) NOT NULL,
-  `lastname` varchar(50) DEFAULT NULL,
+  `lastname` varchar(50) DEFAULT ' ',
   `email` varchar(50) NOT NULL,
   `password` varchar(60) NOT NULL,
   `phoneNumber` varchar(15) DEFAULT NULL,
@@ -101,8 +96,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `phoneNumber`, `pin`, `balance`, `picture`, `role`, `status`, `createdAt`, `updatedAt`) VALUES
-(16, 'abbi', 'satria', 'abbisatria98@gmail.com', '$2b$10$9UltJvpymNQSlB4sY6p.au77uXBwk8jLTr22StUjtQvIJRhJYCX2O', '085811588248', '$2b$10$zBXudvOEGfmw84NjEw8pMOyKDH4UvdW1shLI8v6wUIDiPS5vNSfNe', 0, 'profile-picture-1612968135647.jpg', 2, 'active', '2021-02-10 06:21:41', '2021-02-10 15:49:56'),
-(17, 'Ridho', NULL, 'ridho@gmail.com', '$2b$10$WJFexHTs/gAVUHlDnNk.FeXiSiBkkwLn9TZQkILnzO.kcQNFIWHe2', NULL, '$2b$10$Ps8HTjtVCy5oZyUVivu0OuGi979PZWe80G6uC32OIQ5EIWCASmxj2', 40000, NULL, 2, 'active', '2021-02-10 15:10:36', '2021-02-10 16:19:08');
+(24, 'Abbi', ' ', 'abbisatria98@gmail.com', '$2b$10$qzT5F/Yn4alEySELsbmF4.9R2bS8qfLtWG./ePtIfhr.pN9EbuHcO', NULL, '$2b$10$1yQ4OYW1zAMbqHAG20ZW/OwFknYO.oVt51ua/4EuA2abb8od5mmVK', 100000, NULL, 2, 'active', '2021-02-13 05:01:52', '2021-02-13 08:58:48'),
+(25, 'Ridho', ' ', 'ridho@gmail.com', '$2b$10$n60/HGdGkJZ/1PAWJHBRBO6jt.APnfSLlg077horI/gIshw8HG4ka', NULL, NULL, 120000, NULL, 2, 'active', '2021-02-13 08:52:47', '2021-02-13 08:53:33');
 
 --
 -- Indexes for dumped tables
@@ -137,19 +132,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `amount_transaction`
 --
 ALTER TABLE `amount_transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

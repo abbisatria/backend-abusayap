@@ -28,7 +28,7 @@ exports.signUp = async (req, res) => {
         createUser = await userModel.createUser({ firstname, email, password: encryptedPassword, role: 2, status: 'pending', balance: 120000 })
       }
       if (createUser.insertId > 0) {
-        sendEmail(createUser.insertId, `${APP_URL}auth/verification/${createUser.insertId}`, 'Verify Email Address', "Thanks for signing up for ABUSAYAP! We're excited to have you as an early user.")
+        sendEmail(createUser.insertId, `${APP_URL}/auth/verification/${createUser.insertId}`, 'Verify Email Address', "Thanks for signing up for ABUSAYAP! We're excited to have you as an early user.")
         return response(res, 200, true, 'Register Success, Please verification email!')
       } else {
         return response(res, 400, false, 'Register Failed')
@@ -88,7 +88,7 @@ exports.forgotPassword = async (req, res) => {
     if (existingUser.length > 0) {
       const id = existingUser[0].id
       const token = jwt.sign({ id }, APP_KEY)
-      sendEmail(existingUser[0].id, `http://localhost:3000/forgot-password/${token}`, 'Reset Password', 'To reset your password, click the following link and follow the instructions.')
+      sendEmail(existingUser[0].id, `http://localhost:3000/create-new-password/${token}`, 'Reset Password', 'To reset your password, click the following link and follow the instructions.')
       return response(res, 200, true, 'Please check email to reset password!')
     }
     return response(res, 401, false, 'Email not registered')
@@ -109,6 +109,22 @@ exports.resetPassword = async (req, res) => {
       return response(res, 200, true, 'Reset Password Success')
     }
     return response(res, 400, false, 'Failed reset password')
+  } catch (error) {
+    return response(res, 400, false, 'Bad Request')
+  }
+}
+
+exports.createPin = async (req, res) => {
+  try {
+    const { id } = req.params
+    const { pin } = req.body
+    const salt = await bcrypt.genSalt()
+    const encryptedPin = await bcrypt.hash(pin, salt)
+    const update = await userModel.updateUser(id, { pin: encryptedPin })
+    if (update.affectedRows > 0) {
+      return response(res, 200, true, 'Your PIN Was Successfully Created')
+    }
+    return response(res, 400, false, 'Failed Created PIN')
   } catch (error) {
     return response(res, 400, false, 'Bad Request')
   }
