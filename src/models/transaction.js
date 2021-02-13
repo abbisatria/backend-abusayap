@@ -116,3 +116,18 @@ exports.getCountTransactionHistory = (id, cond) => {
     console.log(query.sql)
   })
 }
+
+exports.getTransactionLastWeek = (id, dateNow, lastWeekDate) => {
+  return new Promise((resolve, reject) => {
+    const query = db.query(`
+    SELECT * FROM transactions
+    WHERE (idSender=${id} OR idReceiver=${id})
+    AND dateTransaction >= '${lastWeekDate}' AND '${dateNow}' >= dateTransaction
+    ORDER BY dateTransaction ASC
+    `, (err, res, field) => {
+      if (err) reject(err)
+      resolve(res)
+    })
+    console.log(query.sql)
+  })
+}

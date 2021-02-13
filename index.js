@@ -20,6 +20,7 @@ app.use('/auth', require('./src/routes/auth'))
 app.use('/user', require('./src/routes/user'))
 app.use('/transaction', require('./src/routes/transaction'))
 app.use('/contact', require('./src/routes/contact'))
+app.use('/chart', require('./src/routes/chart'))
 
 // Test App
 app.get('/', (req, res) => {
