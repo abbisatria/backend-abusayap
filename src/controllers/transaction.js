@@ -62,7 +62,7 @@ exports.createTransaction = async (req, res) => {
         return response(res, 400, false, 'Balance is not enough')
       }
     } else {
-      return response(res, 400, false, 'Do not transfer to yourself')
+      return response(res, 400, false, 'The pin you entered is wrong')
     }
   } catch (error) {
     console.log(error)
