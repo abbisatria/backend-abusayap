@@ -4,7 +4,7 @@ const authMiddleware = require('../middleware/auth')
 const validator = require('../middleware/validator')
 const uploadImage = require('../middleware/uploadProfile')
 
-routes.get('/:id', userController.getDetailUser)
+routes.get('/:id', authMiddleware.authCheck, userController.getDetailUser)
 routes.patch('/:id', authMiddleware.authCheck, uploadImage, validator.updateUser, validator.valdationResult, userController.UpdateUser)
 
 module.exports = routes
