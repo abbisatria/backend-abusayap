@@ -71,7 +71,7 @@ exports.UpdateUser = async (req, res) => {
       if (phoneNumber === initialResults[0].phoneNumber) {
         const deletePhoneNumber = await userModel.updateUser(id, { phoneNumber: null })
         if (deletePhoneNumber.affectedRows > 0) {
-          return response(res, 200, true, 'Phone number has been deleted')
+          return response(res, 200, true, 'Phone number has been deleted', { phoneNumber: null })
         }
         return response(res, 400, false, 'Cant delete phone number')
       } else {
