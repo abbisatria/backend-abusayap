@@ -73,7 +73,7 @@ exports.verificationEmail = async (req, res) => {
     const { id } = req.params
     if (id) {
       await userModel.updateUser(id, { status: 'active' })
-      return res.redirect(`http://localhost:3000/create-pin/${id}`)
+      return res.redirect(`https://abusayap.netlify.app/create-pin/${id}`)
     }
     return response(res, 400, false, 'Failed email verification')
   } catch (error) {
@@ -88,7 +88,7 @@ exports.forgotPassword = async (req, res) => {
     if (existingUser.length > 0) {
       const id = existingUser[0].id
       const token = jwt.sign({ id }, APP_KEY)
-      sendEmail(existingUser[0].id, `http://localhost:3000/create-new-password/${token}`, 'Reset Password', 'To reset your password, click the following link and follow the instructions.')
+      sendEmail(existingUser[0].id, `https://abusayap.netlify.app/create-new-password/${token}`, 'Reset Password', 'To reset your password, click the following link and follow the instructions.')
       return response(res, 200, true, 'Please check email to reset password!')
     }
     return response(res, 401, false, 'Email not registered')
