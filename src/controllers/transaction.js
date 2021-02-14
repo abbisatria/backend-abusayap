@@ -52,8 +52,7 @@ exports.createTransaction = async (req, res) => {
           notes: finalResults[0].notes,
           receiver: [
             {
-              firstname: userReceiver[0].firstname,
-              lastname: userReceiver[0].lastname,
+              name: `${userReceiver[0].firstname} ${userReceiver[0].lastname}`,
               picture: userReceiver[0].picture,
               phoneNumber: userReceiver[0].phoneNumber
             }
@@ -63,7 +62,7 @@ exports.createTransaction = async (req, res) => {
         return response(res, 400, false, 'Balance is not enough')
       }
     } else {
-      return response(res, 400, false, 'Do not transfer to yourself')
+      return response(res, 400, false, 'The pin you entered is wrong')
     }
   } catch (error) {
     console.log(error)
