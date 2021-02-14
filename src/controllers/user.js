@@ -59,7 +59,7 @@ exports.UpdateUser = async (req, res) => {
         const encryptedNewPassword = await bcrypt.hash(newPassword, salt)
         const passwordResult = await userModel.updateUser(id, { password: encryptedNewPassword })
         if (passwordResult.affectedRows > 0) {
-          return response(res, 200, true, 'Password have been updated')
+          return response(res, 200, true, 'Password have been updated', { id: initialResults[0].id })
         }
         return response(res, 400, false, 'Password cant update')
       }
@@ -92,7 +92,7 @@ exports.UpdateUser = async (req, res) => {
         if (initialResults[0].picture !== null) {
           fs.unlinkSync(`upload/profile/${initialResults[0].picture}`)
         }
-        return response(res, 400, true, 'Image hash been Updated', { id, picture })
+        return response(res, 200, true, 'Image hash been Updated', { id, picture })
       }
       return response(res, 400, false, 'Cant update image')
     }
