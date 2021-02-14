@@ -22,7 +22,7 @@ exports.signUp = async (req, res) => {
       const salt = await bcrypt.genSalt()
       const encryptedPassword = await bcrypt.hash(password, salt)
       let createUser = null
-      if (lastname === null) {
+      if (lastname !== null) {
         createUser = await userModel.createUser({ firstname, lastname, email, password: encryptedPassword, role: 2, status: 'pending', balance: 120000 })
       } else {
         createUser = await userModel.createUser({ firstname, email, password: encryptedPassword, role: 2, status: 'pending', balance: 120000 })

@@ -5,7 +5,7 @@ exports.getStatisticTransacttion = async (req, res) => {
     const { id } = req.userData
     console.log(id)
     const today = new Date().toISOString().slice(0, 10)
-    const dateNow = new Date(new Date(today).getTime() + 1 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
+    const dateNow = new Date(new Date(today).getTime() + 1 * 31 * 60 * 60 * 1000).toISOString().slice(0, 10)
     const lastWeekDate = new Date(new Date(dateNow).getTime() - 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
 
     console.log(`${dateNow} & ${lastWeekDate}`)
