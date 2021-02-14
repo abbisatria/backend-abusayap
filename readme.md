@@ -21,10 +21,3 @@ Backend For Abusayap app. Abusayap is app wallet digital
 
 ## API SPECS
 You can see the API Documentation [here](https://documenter.getpostman.com/view/12252506/TW77fiEj)
-### Auth
--
-
-### Transaction
--
-
-
